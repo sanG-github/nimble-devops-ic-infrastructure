@@ -30,13 +30,19 @@ jobs:
 
       - name: Run Terraform format
         run: terraform fmt -recursive -check
-        
+
       - name: Initialize Terraform
         run: terraform init
-      
+
       - name: Validate Terraform configurations
-        run: terraform validate -no-color    
+        run: terraform validate -no-color
 
       - name: Run tfsec linter
         id: tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
+
+      - name: Run checkov linter
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          args: --quiet --framework terraform --directory base
