@@ -6,6 +6,10 @@ on:
 env:
   TERRAFORM_VERSION: "1.5.7"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   linting:
     name: Lint Terraform files
@@ -13,11 +17,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.11.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Checkout the repository
         uses: actions/checkout@v3
         with:
