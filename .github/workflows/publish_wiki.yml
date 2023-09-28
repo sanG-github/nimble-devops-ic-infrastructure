@@ -9,6 +9,8 @@ on:
     branches:
       - develop
 
+permissions: read-all
+
 jobs:
   publish_wiki:
     name: Publish Wiki

@@ -10,6 +10,8 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: read-all
+
 jobs:
   linting:
     name: Lint Terraform files
@@ -44,4 +46,4 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          args: --quiet --framework terraform --directory base
+          args: --quiet --framework terraform
