@@ -1,9 +1,9 @@
 locals {
   # Sets max amount of the latest develop images to be kept
-  image_limit        = 5
+  image_limit = 5
 
   # The namespace for the ECR
-  namespace          = "my-ecr"
+  namespace = "my-ecr"
 
   # Tag prefix for the images
   primary_prefixes   = ["develop", "main"]
