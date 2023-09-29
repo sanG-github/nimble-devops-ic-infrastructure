@@ -3,7 +3,11 @@ terraform {
     organization = "devops-ic"
 
     workspaces {
-      name = "staging"
+      name = "shared"
     }
   }
+}
+
+module "ecr" {
+  source = "../modules/ecr"
 }
