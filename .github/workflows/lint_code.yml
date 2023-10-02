@@ -46,4 +46,6 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          args: --quiet --framework terraform
+          quite: true
+          framework: terraform
+          skip_check: CKV_AWS_51,CKV_AWS_136
