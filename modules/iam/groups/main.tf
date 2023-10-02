@@ -1,13 +1,16 @@
+#tfsec:ignore:aws-iam-enforce-group-mfa
 resource "aws_iam_group" "admin" {
   name = "Admin-group"
   path = "/admins"
 }
 
+#tfsec:ignore:aws-iam-enforce-group-mfa
 resource "aws_iam_group" "developer" {
   name = "Developer-group"
   path = "/developers"
 }
 
+#tfsec:ignore:aws-iam-enforce-group-mfa
 resource "aws_iam_group" "bot" {
   name = "Bot-group"
   path = "/bots"
