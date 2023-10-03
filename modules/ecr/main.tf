@@ -1,6 +1,8 @@
 # tfsec:ignore:aws-ecr-enforce-immutable-repository tfsec:ignore:aws-ecr-repository-customer-key
 resource "aws_ecr_repository" "this" {
-  name = local.namespace
+  #checkov:skip=CKV_AWS_136: There is no need to encrypt the ECR repository with a customer-managed KMS key
+  name                 = local.namespace
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
