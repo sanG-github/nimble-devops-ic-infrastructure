@@ -1,4 +1,4 @@
 ---
 evaluate-variables: true
 framework: terraform
-quite: true
+quiet: true
