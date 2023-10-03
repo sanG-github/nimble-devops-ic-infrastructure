@@ -17,7 +17,7 @@ resource "aws_iam_group" "bot" {
 }
 
 resource "aws_iam_group_policy_attachment" "admin_access" {
-  group      = aws_iam_group.admin.name
+  group = aws_iam_group.admin.name
 
   #checkov:skip=CKV_AWS_274: Admin accounts require admin access
   policy_arn = data.aws_iam_policy.admin_access.arn
