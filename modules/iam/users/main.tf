@@ -1,5 +1,5 @@
-#checkov:skip=CKV_AWS_273: Allow access is controlled through AWS IAM defined users
 resource "aws_iam_user" "user_account" {
+  #checkov:skip=CKV_AWS_273: Allow access is controlled through AWS IAM defined users
   for_each = toset(var.usernames)
 
   name = each.value
