@@ -3,7 +3,7 @@ locals {
   image_limit = 5
 
   # The namespace for the ECR
-  namespace = "my-ecr"
+  namespace = "devops-ic-ecr"
 
   # Tag prefix for the images
   primary_prefixes   = ["develop", "main"]
