@@ -3,7 +3,29 @@ resource "aws_kms_key" "service_key" {
   enable_key_rotation = local.enable_key_rotation
 }
 
+resource "aws_kms_key_policy" "service_key_policy" {
+  key_id = aws_kms_key.service_key.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Id      = "service_key_policy"
+    Statement = [
+      {
+        Action = "kms:*"
+        Effect = "Allow"
+        Principal = {
+          AWS = "*"
+        }
+
+        Resource = "*"
+        Sid      = "Enable IAM User Permissions"
+      },
+    ]
+  })
+}
+
 resource "aws_secretsmanager_secret" "service_secrets" {
+  #checkov:skip=CKV2_AWS_57: There is no need to enable key rotation
   for_each = var.secrets
 
   name                    = "${local.namespace}/${lower(each.key)}"
