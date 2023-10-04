@@ -3,7 +3,7 @@ resource "aws_iam_user" "user_account" {
   for_each = toset(var.usernames)
 
   name = each.value
-  path = var.path
+  path = local.path
 
   force_destroy = true
 }

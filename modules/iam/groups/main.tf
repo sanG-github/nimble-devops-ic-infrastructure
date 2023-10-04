@@ -26,7 +26,10 @@ resource "aws_iam_group_policy_attachment" "developer_power_user_access" {
 }
 
 resource "aws_iam_group_policy" "developer_allow_manage_own_credentials" {
-  group  = aws_iam_group.developer.name
+  group = aws_iam_group.developer.name
+
+  #checkov:skip=CKV_AWS_355: Allow users to manage their own credentials
+  #tfsec:ignore:aws-iam-no-policy-wildcards
   policy = local.allow_manage_own_credentials
 }
 
