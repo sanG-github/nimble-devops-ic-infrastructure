@@ -1,4 +1,4 @@
-# tfsec:ignore:aws-ecr-enforce-immutable-repository tfsec:ignore:aws-ecr-repository-customer-key
+# tfsec:ignore:aws-ecr-repository-customer-key
 resource "aws_ecr_repository" "this" {
   #checkov:skip=CKV_AWS_136: There is no need to encrypt the ECR repository with a customer-managed KMS key
   name                 = local.namespace
