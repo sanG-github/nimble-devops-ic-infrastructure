@@ -3,7 +3,7 @@ terraform {
     organization = "devops-ic"
 
     workspaces {
-      name = "staging"
+      tags = ["aws-infrastructure"]
     }
   }
 }
