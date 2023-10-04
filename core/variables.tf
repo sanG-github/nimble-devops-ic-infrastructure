@@ -3,3 +3,8 @@ variable "environment" {
   type        = string
   default     = "staging"
 }
+
+variable "secret_key_base" {
+  description = "The secret key base for the application"
+  type        = string
+}
