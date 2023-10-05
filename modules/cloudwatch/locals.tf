@@ -3,5 +3,5 @@ locals {
   namespace = "devops-ic-cloudwatch"
 
   # Log retention in days
-  retention_in_days = 30
+  retention_in_days = 400
 }
