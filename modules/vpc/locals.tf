@@ -1,6 +1,6 @@
 locals {
   # Namespace for the VPCs, used as the prefix for the VPC names
-  namespace = "my-vpc"
+  namespace = "devops-ic-vpc"
 
   # VPC CIDR
   cidr = "10.0.0.0/16"
