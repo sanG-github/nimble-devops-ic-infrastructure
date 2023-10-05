@@ -11,7 +11,7 @@ terraform {
 module "cloudwatch" {
   source = "../modules/cloudwatch"
 
-#  kms_key_id = module.secrets_manager.secret_cloudwatch_log_key_arn
+  kms_key_id = module.secrets_manager.secret_cloudwatch_log_key_arn
 }
 
 module "secrets_manager" {
