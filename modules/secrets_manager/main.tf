@@ -19,7 +19,7 @@ resource "aws_kms_key_policy" "service_key_policy" {
 
         Resource = "*"
         Sid      = "Enable IAM User Permissions"
-      },
+      }
     ]
   })
 }
