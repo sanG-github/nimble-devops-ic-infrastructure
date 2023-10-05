@@ -39,6 +39,9 @@ resource "aws_iam_group_policy_attachment" "bot_power_user_access" {
 }
 
 resource "aws_iam_group_policy" "bot_full_iam_access" {
-  group  = aws_iam_group.bot.name
+  group = aws_iam_group.bot.name
+
+  #checkov:skip=CKV2_AWS_40: Allow bot full IAM privileges
+  #tfsec:ignore:aws-iam-no-policy-wildcards
   policy = local.full_iam_access_policy
 }
