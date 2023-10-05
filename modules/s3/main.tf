@@ -21,7 +21,7 @@ resource "aws_s3_bucket_logging" "this" {
   bucket = aws_s3_bucket.this.id
 
   target_bucket = aws_s3_bucket.this.id
-  target_prefix = "logs/bucket"
+  target_prefix = local.target_prefix
 }
 
 resource "aws_s3_bucket_versioning" "this" {
