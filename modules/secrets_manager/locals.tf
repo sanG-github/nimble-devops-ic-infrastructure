@@ -1,6 +1,6 @@
 locals {
   # Description of the KMS key
-  description = "KMS key for ${local.namespace}-service"
+  description = "KMS key for ${local.namespace} service"
 
   # The namespace for the KMS
   namespace = "devops-ic-kms"

@@ -1,14 +1,14 @@
-resource "aws_kms_key" "service_key" {
+resource "aws_kms_key" "secret_cloudwatch_log_key_arn" {
   description         = local.description
   enable_key_rotation = local.enable_key_rotation
 }
 
-resource "aws_kms_key_policy" "service_key_policy" {
-  key_id = aws_kms_key.service_key.id
+resource "aws_kms_key_policy" "secret_cloudwatch_log_key_arn_policy" {
+  key_id = aws_kms_key.secret_cloudwatch_log_key_arn.id
 
   policy = jsonencode({
     Version = "2012-10-17"
-    Id      = "service_key_policy"
+    Id      = "secret_cloudwatch_log_key_arn_policy"
     Statement = [
       {
         Action = "kms:*"
@@ -30,7 +30,7 @@ resource "aws_secretsmanager_secret" "service_secrets" {
 
   name                    = "${local.namespace}/${lower(each.key)}"
   description             = "Secret `${lower(each.key)}` for ${local.namespace}"
-  kms_key_id              = aws_kms_key.service_key.arn
+  kms_key_id              = aws_kms_key.secret_cloudwatch_log_key_arn.arn
   recovery_window_in_days = 0
 
   tags = {
