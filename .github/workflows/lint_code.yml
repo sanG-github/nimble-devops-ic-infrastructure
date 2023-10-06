@@ -46,4 +46,4 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          args: --quiet --framework terraform
+          config_file: .checkov.yml

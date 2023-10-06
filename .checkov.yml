@@ -1,0 +1,4 @@
+---
+evaluate-variables: true
+framework: terraform
+quiet: true
