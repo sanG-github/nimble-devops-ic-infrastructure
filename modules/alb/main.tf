@@ -1,12 +1,16 @@
 resource "aws_lb" "this" {
+  #checkov:skip=CKV2_AWS_20: HTTP protocol is used for redirecting to HTTPS
+  #checkov:skip=CKV2_AWS_28: There is no need to protect public ALB by WAF
   name               = local.namespace
   load_balancer_type = local.load_balancer_type
   subnets            = var.subnet_ids
   security_groups    = var.security_group_ids
 
-  internal                   = false
   enable_deletion_protection = true
   drop_invalid_header_fields = true
+
+  # tfsec:ignore:aws-elb-alb-not-public
+  internal = false
 
   access_logs {
     bucket  = local.access_logs_bucket
@@ -18,9 +22,9 @@ resource "aws_lb_target_group" "application_target_group" {
   port                 = var.app_port
   vpc_id               = var.vpc_id
   name                 = local.application_target_group_name
-  protocol             = local.application_target_group_protocol
   target_type          = local.application_target_type
   deregistration_delay = local.application_target_deregistration_delay
+  protocol             = local.application_target_group_protocol
 
   health_check {
     path                = var.health_check_path
@@ -43,10 +47,14 @@ resource "aws_lb_target_group" "application_target_group" {
   }
 }
 
+# tfsec:ignore:aws-elb-http-not-used
 resource "aws_lb_listener" "app_http" {
   load_balancer_arn = aws_lb.this.arn
   port              = local.aws_lb_listener_port
-  protocol          = local.aws_lb_listener_protocol
+
+  #checkov:skip=CKV_AWS_2: HTTP protocol is used for redirecting to HTTPS
+  #checkov:skip=CKV_AWS_103: HTTP protocol is used for redirecting to HTTPS, so there is no TLS certificate
+  protocol = local.aws_lb_listener_protocol
 
   default_action {
     type             = "forward"

@@ -1,4 +1,5 @@
 resource "aws_security_group" "alb" {
+  #checkov:skip=CKV2_AWS_5: This security group is used by an ALB
   vpc_id      = var.vpc_id
   name        = local.alb_security_group_name
   description = local.alb_security_group_description
@@ -10,6 +11,7 @@ resource "aws_security_group" "alb" {
 
 #tfsec:ignore:aws-ec2-no-public-ingress-sgr
 resource "aws_security_group_rule" "alb_ingress_http" {
+  #checkov:skip=CKV_AWS_260: Allow ingress from 0.0.0.0:0 to port 80
   security_group_id = aws_security_group.alb.id
   type              = "ingress"
   protocol          = "tcp"
