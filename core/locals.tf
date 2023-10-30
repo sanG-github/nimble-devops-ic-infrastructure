@@ -7,4 +7,10 @@ locals {
 
   # AWS region
   region = "ap-southeast-1"
+
+  # The application exposed port
+  app_port = 3000
+
+  # The health check path of the Application
+  health_check_path = "/health"
 }
