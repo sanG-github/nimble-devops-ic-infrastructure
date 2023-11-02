@@ -12,7 +12,7 @@ variable "secret_key_base" {
 variable "rds_instance_type" {
   description = "RDS instance type"
   type        = string
-  default     = "db.t4g.medium"
+  default     = "db.t2"
 }
 
 variable "rds_username" {
