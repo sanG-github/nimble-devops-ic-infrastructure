@@ -9,8 +9,7 @@ locals {
     { name = "AWS_REGION", value = var.region },
     { name = "HEALTH_CHECK_PATH", value = var.health_check_path },
     { name = "APP_HOST", value = var.app_host },
-    { name = "APP_PORT", value = var.app_port },
-    { name = "DATABASE_URL", value = "" },
+    { name = "APP_PORT", value = var.app_port }
   ])
 
   container_vars = {

@@ -33,6 +33,7 @@ resource "aws_security_group_rule" "alb_egress" {
 }
 
 resource "aws_security_group" "ecs_fargate" {
+  #checkov:skip=CKV2_AWS_5: This security group will be used by an ECS Fargate task
   name        = "${local.namespace}-ecs-fargate"
   description = "ECS Fargate Security Group"
   vpc_id      = var.vpc_id
