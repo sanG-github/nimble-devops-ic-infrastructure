@@ -5,6 +5,9 @@ locals {
   # The owner of the infrastructure, used to tag the resources, e.g. `acme-web`
   owner = "sanghuynh20000"
 
+  # The repository name of the ECR to retrieve the image from
+  ecr_repo_name = "devops-ic-ecr"
+
   # AWS region
   region = "ap-southeast-1"
 

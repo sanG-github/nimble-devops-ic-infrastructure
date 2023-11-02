@@ -19,8 +19,9 @@ module "s3" {
 module "security_group" {
   source = "../modules/security_group"
 
-  vpc_id   = module.vpc.vpc_id
-  app_port = local.app_port
+  vpc_id                      = module.vpc.vpc_id
+  app_port                    = local.app_port
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 }
 
 module "alb" {
@@ -45,4 +46,28 @@ module "secrets_manager" {
   secrets = {
     secret_key_base = var.secret_key_base
   }
+}
+
+module "ecs" {
+  source = "../modules/ecs"
+
+  region                             = local.region
+  app_port                           = local.app_port
+  ecr_repo_name                      = local.ecr_repo_name
+  health_check_path                  = local.health_check_path
+  subnets                            = module.vpc.private_subnet_ids
+  app_host                           = module.alb.alb_dns_name
+  security_groups                    = module.security_group.ecs_security_group_ids
+  alb_target_group_arn               = module.alb.alb_target_group_arn
+  aws_cloudwatch_log_group_name      = module.cloudwatch.aws_cloudwatch_log_group_name
+  deployment_maximum_percent         = var.ecs.deployment_maximum_percent
+  deployment_minimum_healthy_percent = var.ecs.deployment_minimum_healthy_percent
+  web_container_cpu                  = var.ecs.web_container_cpu
+  web_container_memory               = var.ecs.web_container_memory
+  desired_count                      = var.ecs.task_desired_count
+  max_capacity                       = var.ecs.max_capacity
+  max_cpu_threshold                  = var.ecs.max_cpu_threshold
+
+  secrets_variables = module.secrets_manager.secrets_variables
+  secret_arns       = module.secrets_manager.secret_arns
 }
