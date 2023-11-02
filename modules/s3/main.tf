@@ -79,3 +79,16 @@ resource "aws_s3_bucket_policy" "allow_elb_logging" {
   bucket = aws_s3_bucket.alb_log.id
   policy = jsonencode(local.aws_s3_alb_log_bucket_policy)
 }
+
+resource "aws_s3_bucket_lifecycle_configuration" "delete_expired_alb_logs_lifecycle" {
+  bucket = aws_s3_bucket.alb_log.id
+
+  rule {
+    id     = "expire-alb-logs"
+    status = "Enabled"
+
+    expiration {
+      days = local.alb_logs_expiration_in_days
+    }
+  }
+}

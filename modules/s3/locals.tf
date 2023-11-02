@@ -11,6 +11,9 @@ locals {
   # Prefix for logs of the bucket
   log_target_prefix = "logs/"
 
+  # The number of days after which to expire log objects
+  alb_logs_expiration_in_days = 90
+
   # Allow ALB to write log to S3 bucket
   aws_s3_alb_log_bucket_policy = {
     Version = "2012-10-17"
