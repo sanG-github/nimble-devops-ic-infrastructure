@@ -87,6 +87,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "delete_expired_alb_logs_lifecy
     id     = "expire-alb-logs"
     status = "Enabled"
 
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 3
+    }
     expiration {
       days = local.alb_logs_expiration_in_days
     }
