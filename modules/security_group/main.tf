@@ -73,3 +73,23 @@ resource "aws_security_group_rule" "ecs_fargate_egress_anywhere" {
   cidr_blocks       = ["0.0.0.0/0"]
   description       = "From app to everywhere"
 }
+
+resource "aws_security_group" "rds" {
+  name        = "${local.namespace}-rds"
+  description = "RDS Security Group"
+  vpc_id      = var.vpc_id
+
+  tags = {
+    Name = "${local.namespace}-rds"
+  }
+}
+
+resource "aws_security_group_rule" "rds_ingress_app_fargate" {
+  type                     = "ingress"
+  security_group_id        = aws_security_group.rds.id
+  from_port                = var.rds_port
+  to_port                  = var.rds_port
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.ecs_fargate.id
+  description              = "From app to DB"
+}
