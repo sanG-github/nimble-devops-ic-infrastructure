@@ -75,6 +75,7 @@ resource "aws_security_group_rule" "ecs_fargate_egress_anywhere" {
 }
 
 resource "aws_security_group" "rds" {
+  #checkov:skip=CKV2_AWS_5: This security group will be used by an RDS instance
   name        = "${local.namespace}-rds"
   description = "RDS Security Group"
   vpc_id      = var.vpc_id

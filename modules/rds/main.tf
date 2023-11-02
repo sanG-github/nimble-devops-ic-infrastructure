@@ -1,4 +1,5 @@
 module "rds" {
+  #checkov:skip=CKV_TF_1: Use specific version instead of defining the commit hash
   source  = "terraform-aws-modules/rds-aurora/aws"
   version = "7.6.0"
 
