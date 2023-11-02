@@ -3,7 +3,7 @@ data "aws_ecr_repository" "repo" {
 }
 
 data "aws_ecs_task_definition" "task" {
-  task_definition = aws_ecs_task_definition.main.family
+  task_definition = aws_ecs_task_definition.this.family
 }
 
 data "aws_iam_policy_document" "ecs_task_execution_role" {

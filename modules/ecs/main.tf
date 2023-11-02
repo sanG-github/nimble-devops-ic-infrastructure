@@ -35,7 +35,7 @@ resource "aws_iam_role" "ecs_task_role" {
   assume_role_policy = data.aws_iam_policy_document.ecs_task_execution_role.json
 }
 
-resource "aws_ecs_cluster" "main" {
+resource "aws_ecs_cluster" "this" {
   name = "${local.namespace}-ecs-cluster"
 
   setting {
@@ -44,7 +44,7 @@ resource "aws_ecs_cluster" "main" {
   }
 }
 
-resource "aws_ecs_task_definition" "main" {
+resource "aws_ecs_task_definition" "this" {
   family                   = "${local.namespace}-service"
   cpu                      = var.web_container_cpu
   memory                   = var.web_container_memory
@@ -55,14 +55,14 @@ resource "aws_ecs_task_definition" "main" {
   requires_compatibilities = ["FARGATE"]
 }
 
-resource "aws_ecs_service" "main" {
+resource "aws_ecs_service" "this" {
   name                               = "${local.namespace}-ecs-service"
-  cluster                            = aws_ecs_cluster.main.id
+  cluster                            = aws_ecs_cluster.this.id
   launch_type                        = "FARGATE"
   deployment_maximum_percent         = var.deployment_maximum_percent
   deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
   desired_count                      = var.desired_count
-  task_definition                    = "${aws_ecs_task_definition.main.family}:${max(aws_ecs_task_definition.main.revision, data.aws_ecs_task_definition.task.revision)}"
+  task_definition                    = "${aws_ecs_task_definition.this.family}:${max(aws_ecs_task_definition.this.revision, data.aws_ecs_task_definition.task.revision)}"
 
   deployment_circuit_breaker {
     enable   = true
@@ -81,20 +81,20 @@ resource "aws_ecs_service" "main" {
   }
 }
 
-resource "aws_appautoscaling_target" "main" {
+resource "aws_appautoscaling_target" "this" {
   max_capacity       = var.max_capacity
   min_capacity       = var.desired_count
-  resource_id        = "service/${aws_ecs_cluster.main.name}/${aws_ecs_service.main.name}"
+  resource_id        = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 }
 
-resource "aws_appautoscaling_policy" "main" {
+resource "aws_appautoscaling_policy" "this" {
   name               = "${local.namespace}-autoscaling-policy"
   policy_type        = "TargetTrackingScaling"
-  resource_id        = aws_appautoscaling_target.main.resource_id
-  scalable_dimension = aws_appautoscaling_target.main.scalable_dimension
-  service_namespace  = aws_appautoscaling_target.main.service_namespace
+  resource_id        = aws_appautoscaling_target.this.resource_id
+  scalable_dimension = aws_appautoscaling_target.this.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.this.service_namespace
 
   target_tracking_scaling_policy_configuration {
     target_value = var.max_cpu_threshold
