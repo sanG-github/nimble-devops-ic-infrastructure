@@ -14,6 +14,9 @@ locals {
   # The application exposed port
   app_port = 3000
 
+  # The RDS port
+  rds_port = 5432
+
   # The health check path of the Application
   health_check_path = "/health"
 

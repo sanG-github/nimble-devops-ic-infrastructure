@@ -21,6 +21,7 @@ module "security_group" {
 
   vpc_id                      = module.vpc.vpc_id
   app_port                    = local.app_port
+  rds_port                    = local.rds_port
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 }
 
@@ -44,6 +45,7 @@ module "secrets_manager" {
   source = "../modules/secrets_manager"
 
   secrets = {
+    database_url    = module.rds.db_url
     secret_key_base = var.secret_key_base
   }
 }
@@ -70,4 +72,21 @@ module "ecs" {
   environment_variables = local.current_environment_variables
   secrets_variables     = module.secrets_manager.secrets_variables
   secret_arns           = module.secrets_manager.secret_arns
+}
+
+module "rds" {
+  source = "../modules/rds"
+
+  vpc_security_group_ids = module.security_group.rds_security_group_ids
+  vpc_id                 = module.vpc.vpc_id
+  subnet_ids             = module.vpc.private_subnet_ids
+
+  instance_type = var.rds_instance_type
+  database_name = var.environment
+  username      = var.rds_username
+  password      = var.rds_password
+  port          = local.rds_port
+
+  autoscaling_min_capacity = var.rds_autoscaling_min_capacity
+  autoscaling_max_capacity = var.rds_autoscaling_max_capacity
 }
