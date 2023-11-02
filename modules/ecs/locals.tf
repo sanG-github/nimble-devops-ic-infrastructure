@@ -45,7 +45,7 @@ locals {
           "kms:CreateGrant",
           "kms:DescribeKey",
         ],
-        Resource = "*"
+        Resource = "arn:aws:kms:*:*:key/*"
       }
     ]
   }
