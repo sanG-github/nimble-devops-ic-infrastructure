@@ -74,3 +74,8 @@ resource "aws_s3_bucket_versioning" "alb_log" {
     status = "Enabled"
   }
 }
+
+resource "aws_s3_bucket_policy" "allow_elb_logging" {
+  bucket = aws_s3_bucket.alb_log.id
+  policy = jsonencode(local.aws_s3_alb_log_bucket_policy)
+}
