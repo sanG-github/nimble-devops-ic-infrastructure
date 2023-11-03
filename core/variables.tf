@@ -21,3 +21,8 @@ variable "rds_password" {
   type        = string
   sensitive   = true
 }
+
+variable "redis_auth_token" {
+  description = "The auth token for the Redis cluster"
+  type        = string
+}

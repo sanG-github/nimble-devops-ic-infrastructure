@@ -15,6 +15,7 @@ resource "aws_elasticache_replication_group" "this" {
   node_type      = local.node_type
   engine         = local.engine
   engine_version = local.engine_version
+  auth_token     = var.auth_token
 
   parameter_group_name        = local.parameter_group_name
   num_cache_clusters          = local.number_cache_clusters

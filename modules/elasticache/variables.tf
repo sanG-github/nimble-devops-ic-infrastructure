@@ -12,3 +12,8 @@ variable "security_group_ids" {
   description = "One or more VPC security groups associated with the cache cluster"
   type        = list(any)
 }
+
+variable "auth_token" {
+  description = "The auth token for the Redis cluster"
+  type        = string
+}
