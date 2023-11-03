@@ -14,6 +14,9 @@ locals {
   # The application exposed port
   app_port = 3000
 
+  # The port of the Elasticache
+  elasticache_port = 6379
+
   # The health check path of the Application
   health_check_path = "/health"
 
