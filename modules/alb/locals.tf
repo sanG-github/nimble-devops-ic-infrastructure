@@ -11,7 +11,7 @@ locals {
   application_target_deregistration_delay = 100
 
   # health_check
-  health_check_timeout             = 3
+  health_check_timeout             = 20
   health_check_interval            = 5
   health_check_healthy_threshold   = 3
   health_check_unhealthy_threshold = 3
