@@ -9,4 +9,5 @@ locals {
   number_cache_clusters       = 2
   automatic_failover_enabled  = true
   at_rest_encryption_enabled  = true
+  transit_encryption_enabled  = true
 }

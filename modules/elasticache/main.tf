@@ -19,6 +19,7 @@ resource "aws_elasticache_replication_group" "this" {
   parameter_group_name        = local.parameter_group_name
   num_cache_clusters          = local.number_cache_clusters
   at_rest_encryption_enabled  = local.at_rest_encryption_enabled
+  transit_encryption_enabled  = local.transit_encryption_enabled
   automatic_failover_enabled  = local.automatic_failover_enabled
   preferred_cache_cluster_azs = local.preferred_cache_cluster_azs
 
