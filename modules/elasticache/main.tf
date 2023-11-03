@@ -23,5 +23,5 @@ resource "aws_elasticache_replication_group" "this" {
   automatic_failover_enabled  = local.automatic_failover_enabled
   preferred_cache_cluster_azs = local.preferred_cache_cluster_azs
 
-  kms_key_id = module.secrets_manager.secret_cloudwatch_log_key_arn
+  kms_key_id = module.secrets_manager.secret_key_arn
 }
