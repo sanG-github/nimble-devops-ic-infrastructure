@@ -17,3 +17,8 @@ variable "auth_token" {
   description = "The auth token for the Redis cluster"
   type        = string
 }
+
+variable "kms_key_id" {
+  description = "The ARN of the KMS key to be used to encrypt the Redis cluster"
+  type        = string
+}
