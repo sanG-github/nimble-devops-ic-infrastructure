@@ -12,7 +12,7 @@ variable "secret_key_base" {
 variable "rds_instance_type" {
   description = "RDS instance type"
   type        = string
-  default     = "db.t2"
+  default     = "db.t3.micro"
 }
 
 variable "rds_username" {
