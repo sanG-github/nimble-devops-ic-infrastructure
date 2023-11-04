@@ -1,4 +1,4 @@
-This document outlines the software and hardware requirements for running the infrastructure of the [example app](https://github.com/SanG-github/nimble-devops-ic-web). You can refer to the [Infrastructure Diagram](Infrastructure Diagram) for a visual overview of the infrastructure components.
+This document outlines the software and hardware requirements for running the infrastructure of the [example app](https://github.com/SanG-github/nimble-devops-ic-web). You can refer to the [[Architecture Diagram]] for a visual overview of the infrastructure components.
 
 ## Required Hardware
 
@@ -49,7 +49,7 @@ All variables should be set as Terraform variables, and the 'sensitive' flag sho
 | bastion_allowed_ip_connection | SENSITIVE |
 | health_check_path           | /health     |
 | owner                       | sanghuynh20000 |
-| ecs                         | { task_desired_count = 3 web_container_cpu = 256 web_container_memory = 512 deployment_maximum_percent = 200 deployment_minimum_healthy_percent = 50 max_capacity = 10 max_cpu_threshold = 80 } |
+| ecs                         | {<br>&nbsp;&nbsp;task_desired_count = 3 <br>&nbsp;&nbsp;web_container_cpu = 256 <br>&nbsp;&nbsp;web_container_memory = 512 <br>&nbsp;&nbsp;deployment_maximum_percent = 200 <br>&nbsp;&nbsp;deployment_minimum_healthy_percent = 50 <br>&nbsp;&nbsp;max_capacity = 10 <br>&nbsp;&nbsp;max_cpu_threshold = 80 <br>} |
 
 These variables should be configured for `staging` and `production` workspaces. If both environments share those variables, you can set them in the [Variable Sets](https://developer.hashicorp.com/terraform/tutorials/cloud/cloud-multiple-variable-sets).
 
