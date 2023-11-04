@@ -3,3 +3,4 @@
 
 ## Architecture
 - [[Architecture Diagram]]
+- [[Architecture Documentation]]
