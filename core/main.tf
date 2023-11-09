@@ -56,7 +56,6 @@ module "ecs" {
   ecr_repo_name                 = local.ecr_repo_name
   health_check_path             = local.health_check_path
   subnets                       = module.vpc.private_subnet_ids
-  app_host                      = module.alb.alb_dns_name
   security_groups               = module.security_group.ecs_security_group_ids
   alb_target_group_arn          = module.alb.alb_target_group_arn
   aws_cloudwatch_log_group_name = module.cloudwatch.aws_cloudwatch_log_group_name

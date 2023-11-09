@@ -15,20 +15,16 @@ locals {
   environment_variables = toset([
     { name = "AWS_REGION", value = var.region },
     { name = "HEALTH_CHECK_PATH", value = var.health_check_path },
-    { name = "APP_HOST", value = var.app_host },
     { name = "APP_PORT", value = var.app_port }
   ])
 
   container_vars = {
-    namespace                          = local.namespace
-    region                             = var.region
-    app_host                           = var.app_host
-    app_port                           = var.app_port
-    deployment_maximum_percent         = local.deployment_maximum_percent
-    deployment_minimum_healthy_percent = local.deployment_minimum_healthy_percent
-    aws_ecr_repository                 = data.aws_ecr_repository.repo.repository_url
-    aws_ecr_tag                        = local.ecr_tag
-    aws_cloudwatch_log_group_name      = var.aws_cloudwatch_log_group_name
+    namespace                     = local.namespace
+    region                        = var.region
+    app_port                      = var.app_port
+    aws_ecr_repository            = data.aws_ecr_repository.repo.repository_url
+    aws_ecr_tag                   = local.ecr_tag
+    aws_cloudwatch_log_group_name = var.aws_cloudwatch_log_group_name
 
     environment_variables = local.environment_variables
     secrets_variables     = var.secrets_variables

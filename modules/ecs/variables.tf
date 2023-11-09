@@ -3,11 +3,6 @@ variable "region" {
   type        = string
 }
 
-variable "app_host" {
-  description = "Application host name"
-  type        = string
-}
-
 variable "app_port" {
   description = "Application running port"
   type        = number
