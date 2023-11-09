@@ -2,7 +2,14 @@ locals {
   # The namespace for the ECS
   namespace = "devops-ic-ecs"
 
-  ecr_tag = "${local.namespace}-app"
+  ecr_tag                            = "${local.namespace}-app"
+  task_desired_count                 = 3
+  web_container_cpu                  = 256
+  web_container_memory               = 512
+  deployment_maximum_percent         = 200
+  deployment_minimum_healthy_percent = 50
+  max_capacity                       = 10
+  max_cpu_threshold                  = 80
 
   # Environment variables from other variables
   environment_variables = toset([
@@ -17,10 +24,10 @@ locals {
     region                             = var.region
     app_host                           = var.app_host
     app_port                           = var.app_port
-    web_container_cpu                  = var.web_container_cpu
-    web_container_memory               = var.web_container_memory
-    deployment_maximum_percent         = var.deployment_maximum_percent
-    deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
+    web_container_cpu                  = local.web_container_cpu
+    web_container_memory               = local.web_container_memory
+    deployment_maximum_percent         = local.deployment_maximum_percent
+    deployment_minimum_healthy_percent = local.deployment_minimum_healthy_percent
     aws_ecr_repository                 = data.aws_ecr_repository.repo.repository_url
     aws_ecr_tag                        = local.ecr_tag
     aws_cloudwatch_log_group_name      = var.aws_cloudwatch_log_group_name
