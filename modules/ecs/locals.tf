@@ -24,8 +24,6 @@ locals {
     region                             = var.region
     app_host                           = var.app_host
     app_port                           = var.app_port
-    web_container_cpu                  = local.web_container_cpu
-    web_container_memory               = local.web_container_memory
     deployment_maximum_percent         = local.deployment_maximum_percent
     deployment_minimum_healthy_percent = local.deployment_minimum_healthy_percent
     aws_ecr_repository                 = data.aws_ecr_repository.repo.repository_url

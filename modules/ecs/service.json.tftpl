@@ -3,8 +3,6 @@
     "name": "${namespace}",
     "image": "${aws_ecr_repository}:${aws_ecr_tag}",
     "essential": true,
-    "memory": ${web_container_memory},
-    "cpu": ${web_container_cpu},
     "portMappings": [
       {
         "containerPort": ${app_port},
