@@ -1,7 +1,7 @@
 module "rds" {
   #checkov:skip=CKV_TF_1: Use specific version instead of defining the commit hash
   source  = "terraform-aws-modules/rds-aurora/aws"
-  version = "7.6.0"
+  version = "8.5.0"
 
   name = local.namespace
 
@@ -23,7 +23,6 @@ module "rds" {
   autoscaling_max_capacity = var.autoscaling_max_capacity
 
   create_monitoring_role = var.create_monitoring_role
-  create_random_password = false
   create_security_group  = false
   storage_encrypted      = true
 
