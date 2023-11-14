@@ -3,13 +3,6 @@ locals {
   namespace = "devops-ic-ecs"
 
   ecr_tag                            = "${local.namespace}-app"
-  task_desired_count                 = 3
-  web_container_cpu                  = 256
-  web_container_memory               = 512
-  deployment_maximum_percent         = 200
-  deployment_minimum_healthy_percent = 50
-  max_capacity                       = 10
-  max_cpu_threshold                  = 80
 
   # Environment variables from other variables
   environment_variables = toset([

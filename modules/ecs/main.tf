@@ -46,8 +46,8 @@ resource "aws_ecs_cluster" "this" {
 
 resource "aws_ecs_task_definition" "this" {
   family                   = "${local.namespace}-service"
-  cpu                      = local.web_container_cpu
-  memory                   = local.web_container_memory
+  cpu                      = var.web_container_cpu
+  memory                   = var.web_container_memory
   network_mode             = "awsvpc"
   task_role_arn            = aws_iam_role.ecs_task_role.arn
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
@@ -59,9 +59,9 @@ resource "aws_ecs_service" "this" {
   name                               = "${local.namespace}-ecs-service"
   cluster                            = aws_ecs_cluster.this.id
   launch_type                        = "FARGATE"
-  deployment_maximum_percent         = local.deployment_maximum_percent
-  deployment_minimum_healthy_percent = local.deployment_minimum_healthy_percent
-  desired_count                      = local.task_desired_count
+  deployment_maximum_percent         = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
+  desired_count                      = var.task_desired_count
   task_definition                    = "${aws_ecs_task_definition.this.family}:${max(aws_ecs_task_definition.this.revision, data.aws_ecs_task_definition.task.revision)}"
 
   deployment_circuit_breaker {
@@ -82,8 +82,8 @@ resource "aws_ecs_service" "this" {
 }
 
 resource "aws_appautoscaling_target" "this" {
-  max_capacity       = local.max_capacity
-  min_capacity       = local.task_desired_count
+  max_capacity       = var.max_capacity
+  min_capacity       = var.task_desired_count
   resource_id        = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
@@ -97,7 +97,7 @@ resource "aws_appautoscaling_policy" "this" {
   service_namespace  = aws_appautoscaling_target.this.service_namespace
 
   target_tracking_scaling_policy_configuration {
-    target_value = local.max_cpu_threshold
+    target_value = var.max_cpu_threshold
 
     scale_in_cooldown  = 300
     scale_out_cooldown = 300

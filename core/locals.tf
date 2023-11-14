@@ -16,4 +16,13 @@ locals {
 
   # The health check path of the Application
   health_check_path = "/health"
+
+  # The ECS configuration for the current environment
+  current_ecs_config = local.ecs_config[var.environment]
+
+  # ECS configurations for each environment
+  ecs_config = {
+    staging    = jsondecode(file("assets/ecs_configs/staging.json"))
+    production = jsondecode(file("assets/ecs_configs/production.json"))
+  }
 }

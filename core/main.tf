@@ -51,14 +51,21 @@ module "secrets_manager" {
 module "ecs" {
   source = "../modules/ecs"
 
-  region                        = local.region
-  app_port                      = local.app_port
-  ecr_repo_name                 = local.ecr_repo_name
-  health_check_path             = local.health_check_path
-  subnets                       = module.vpc.private_subnet_ids
-  security_groups               = module.security_group.ecs_security_group_ids
-  alb_target_group_arn          = module.alb.alb_target_group_arn
-  aws_cloudwatch_log_group_name = module.cloudwatch.aws_cloudwatch_log_group_name
+  region                             = local.region
+  app_port                           = local.app_port
+  ecr_repo_name                      = local.ecr_repo_name
+  health_check_path                  = local.health_check_path
+  subnets                            = module.vpc.private_subnet_ids
+  security_groups                    = module.security_group.ecs_security_group_ids
+  alb_target_group_arn               = module.alb.alb_target_group_arn
+  aws_cloudwatch_log_group_name      = module.cloudwatch.aws_cloudwatch_log_group_name
+  deployment_maximum_percent         = local.current_ecs_config.deployment_maximum_percent
+  deployment_minimum_healthy_percent = local.current_ecs_config.deployment_minimum_healthy_percent
+  web_container_cpu                  = local.current_ecs_config.web_container_cpu
+  web_container_memory               = local.current_ecs_config.web_container_memory
+  task_desired_count                 = local.current_ecs_config.task_desired_count
+  max_capacity                       = local.current_ecs_config.max_capacity
+  max_cpu_threshold                  = local.current_ecs_config.max_cpu_threshold
 
   secrets_variables = module.secrets_manager.secrets_variables
   secret_arns       = module.secrets_manager.secret_arns
