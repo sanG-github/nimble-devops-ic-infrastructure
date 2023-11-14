@@ -3,6 +3,11 @@ variable "port" {
   type        = number
 }
 
+variable "node_type" {
+  description = "Elasticache node type"
+  type        = string
+}
+
 variable "subnet_ids" {
   description = "Subnet IDs"
   type        = list(any)

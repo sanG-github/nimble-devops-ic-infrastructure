@@ -14,9 +14,6 @@ locals {
   # The application exposed port
   app_port = 3000
 
-  # The port of the Elasticache
-  elasticache_port = 6379
-
   # The health check path of the Application
   health_check_path = "/health"
 
@@ -53,6 +50,20 @@ locals {
       port                     = 5432
       autoscaling_min_capacity = 1
       autoscaling_max_capacity = 3
+    }
+  }
+
+  current_elasticache_config = local.elasticache_config[var.environment]
+
+  elasticache_config = {
+    staging = {
+      node_type = "cache.t2.micro"
+      port      = 6379
+    }
+
+    production = {
+      node_type = "cache.t2.micro"
+      port      = 6379
     }
   }
 }

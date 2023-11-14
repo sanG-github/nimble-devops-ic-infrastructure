@@ -12,7 +12,7 @@ resource "aws_elasticache_replication_group" "this" {
   security_group_ids = var.security_group_ids
 
   port           = var.port
-  node_type      = local.node_type
+  node_type      = var.node_type
   engine         = local.engine
   engine_version = local.engine_version
   auth_token     = var.auth_token
