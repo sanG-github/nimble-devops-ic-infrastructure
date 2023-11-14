@@ -81,12 +81,12 @@ module "rds" {
   vpc_id                 = module.vpc.vpc_id
   subnet_ids             = module.vpc.private_subnet_ids
 
-  instance_type = var.rds_instance_type
   database_name = var.environment
   username      = var.rds_username
   password      = var.rds_password
-  port          = local.rds_port
 
-  autoscaling_min_capacity = var.rds_autoscaling_min_capacity
-  autoscaling_max_capacity = var.rds_autoscaling_max_capacity
+  instance_type            = local.current_rds_config.instance_type
+  port                     = local.current_rds_config.port
+  autoscaling_min_capacity = local.current_rds_config.autoscaling_min_capacity
+  autoscaling_max_capacity = local.current_rds_config.autoscaling_max_capacity
 }
