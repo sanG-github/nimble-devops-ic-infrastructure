@@ -32,7 +32,7 @@ module "rds" {
   master_username     = var.username
   master_password     = var.password
   port                = var.port
-  deletion_protection = false
+  deletion_protection = true
 
   enabled_cloudwatch_logs_exports = var.cloudwatch_logs_exports
 }
