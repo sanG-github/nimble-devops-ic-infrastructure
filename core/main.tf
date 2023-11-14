@@ -67,6 +67,7 @@ module "ecs" {
   max_capacity                       = local.current_ecs_config.max_capacity
   max_cpu_threshold                  = local.current_ecs_config.max_cpu_threshold
 
-  secrets_variables = module.secrets_manager.secrets_variables
-  secret_arns       = module.secrets_manager.secret_arns
+  environment_variables = local.current_environment_variables
+  secrets_variables     = module.secrets_manager.secrets_variables
+  secret_arns           = module.secrets_manager.secret_arns
 }

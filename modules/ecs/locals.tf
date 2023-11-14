@@ -2,7 +2,7 @@ locals {
   # The namespace for the ECS
   namespace = "devops-ic-ecs"
 
-  ecr_tag                            = "${local.namespace}-app"
+  ecr_tag = "${local.namespace}-app"
 
   # Environment variables from other variables
   environment_variables = toset([
@@ -19,7 +19,7 @@ locals {
     aws_ecr_tag                   = local.ecr_tag
     aws_cloudwatch_log_group_name = var.aws_cloudwatch_log_group_name
 
-    environment_variables = local.environment_variables
+    environment_variables = setunion(local.environment_variables, var.environment_variables)
     secrets_variables     = var.secrets_variables
   }
 

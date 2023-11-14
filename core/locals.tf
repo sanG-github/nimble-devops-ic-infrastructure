@@ -25,4 +25,13 @@ locals {
     staging    = jsondecode(file("assets/ecs_configs/staging.json"))
     production = jsondecode(file("assets/ecs_configs/production.json"))
   }
+
+  # ENV variables for the current environment
+  current_environment_variables = local.environment_variables[var.environment]
+
+  # ENV variables for each environment
+  environment_variables = {
+    staging    = [for k, v in jsondecode(file("assets/environment_variables/staging.json")) : { name = k, value = v }]
+    production = [for k, v in jsondecode(file("assets/environment_variables/production.json")) : { name = k, value = v }]
+  }
 }

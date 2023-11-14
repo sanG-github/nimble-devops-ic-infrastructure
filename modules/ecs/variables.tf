@@ -82,3 +82,12 @@ variable "max_cpu_threshold" {
   description = "Threshold for CPU load where to start autoscaling"
   type        = number
 }
+
+variable "environment_variables" {
+  description = "Environment variables for running container"
+
+  type = set(object({
+    name  = string
+    value = string
+  }))
+}
