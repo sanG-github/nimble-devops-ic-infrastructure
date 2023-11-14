@@ -52,8 +52,8 @@ resource "aws_s3_bucket_acl" "alb_log_bucket_acl" {
   depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_acl_ownership]
 }
 
-# Resource to avoid error "AccessControlListNotSupported: The bucket does not allow ACLs"
 resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
+  #checkov:skip=CKV2_AWS_65: The bucket does not allow ACLs"
   bucket = aws_s3_bucket.alb_log.id
   rule {
     object_ownership = "ObjectWriter"
