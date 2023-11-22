@@ -8,7 +8,7 @@ output "secret_arns" {
   value       = local.secret_arns
 }
 
-output "secret_cloudwatch_log_key_arn" {
+output "secret_key_arn" {
   description = "The key to use for logs encryption"
-  value       = aws_kms_key.secret_cloudwatch_log_key_arn.arn
+  value       = aws_kms_key.secret_key_arn.arn
 }

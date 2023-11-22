@@ -52,4 +52,18 @@ locals {
       autoscaling_max_capacity = 3
     }
   }
+
+  current_elasticache_config = local.elasticache_config[var.environment]
+
+  elasticache_config = {
+    staging = {
+      node_type = "cache.t2.micro"
+      port      = 6379
+    }
+
+    production = {
+      node_type = "cache.t2.micro"
+      port      = 6379
+    }
+  }
 }

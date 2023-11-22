@@ -17,3 +17,9 @@ variable "rds_port" {
   description = "RDS port"
   type        = number
 }
+
+
+variable "elasticache_port" {
+  description = "The cache node port"
+  type        = number
+}

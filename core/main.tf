@@ -22,6 +22,7 @@ module "security_group" {
   vpc_id                      = module.vpc.vpc_id
   app_port                    = local.app_port
   rds_port                    = local.current_rds_config.port
+  elasticache_port            = local.current_elasticache_config.port
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 }
 
@@ -38,7 +39,7 @@ module "alb" {
 module "cloudwatch" {
   source = "../modules/cloudwatch"
 
-  kms_key_id = module.secrets_manager.secret_cloudwatch_log_key_arn
+  kms_key_id = module.secrets_manager.secret_key_arn
 }
 
 module "secrets_manager" {
@@ -46,6 +47,7 @@ module "secrets_manager" {
 
   secrets = {
     database_url    = module.rds.db_url
+    redis_url       = module.elasticache.redis_primary_endpoint
     secret_key_base = var.secret_key_base
   }
 }
@@ -89,4 +91,15 @@ module "rds" {
   port                     = local.current_rds_config.port
   autoscaling_min_capacity = local.current_rds_config.autoscaling_min_capacity
   autoscaling_max_capacity = local.current_rds_config.autoscaling_max_capacity
+}
+
+module "elasticache" {
+  source = "../modules/elasticache"
+
+  node_type          = local.current_elasticache_config.node_type
+  port               = local.current_elasticache_config.port
+  subnet_ids         = module.vpc.private_subnet_ids
+  security_group_ids = module.security_group.elasticache_security_group_ids
+  auth_token         = var.redis_auth_token
+  kms_key_id         = module.secrets_manager.secret_key_arn
 }
