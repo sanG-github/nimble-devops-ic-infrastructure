@@ -5,6 +5,9 @@ locals {
   # The owner of the infrastructure, used to tag the resources, e.g. `acme-web`
   owner = "sanghuynh20000"
 
+  # The repository name of the ECR to retrieve the image from
+  ecr_repo_name = "devops-ic-ecr"
+
   # AWS region
   region = "ap-southeast-1"
 
@@ -13,4 +16,22 @@ locals {
 
   # The health check path of the Application
   health_check_path = "/health"
+
+  # The ECS configuration for the current environment
+  current_ecs_config = local.ecs_config[var.environment]
+
+  # ECS configurations for each environment
+  ecs_config = {
+    staging    = jsondecode(file("assets/ecs_configs/staging.json"))
+    production = jsondecode(file("assets/ecs_configs/production.json"))
+  }
+
+  # ENV variables for the current environment
+  current_environment_variables = local.environment_variables[var.environment]
+
+  # ENV variables for each environment
+  environment_variables = {
+    staging    = [for k, v in jsondecode(file("assets/environment_variables/staging.json")) : { name = k, value = v }]
+    production = [for k, v in jsondecode(file("assets/environment_variables/production.json")) : { name = k, value = v }]
+  }
 }

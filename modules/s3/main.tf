@@ -47,8 +47,17 @@ resource "aws_s3_bucket" "alb_log" {
 }
 
 resource "aws_s3_bucket_acl" "alb_log_bucket_acl" {
+  bucket     = aws_s3_bucket.alb_log.id
+  acl        = "private"
+  depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_acl_ownership]
+}
+
+resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
+  #checkov:skip=CKV2_AWS_65: The bucket does not allow ACLs"
   bucket = aws_s3_bucket.alb_log.id
-  acl    = "private"
+  rule {
+    object_ownership = "ObjectWriter"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "alb_log" {
