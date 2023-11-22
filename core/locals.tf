@@ -34,4 +34,22 @@ locals {
     staging    = [for k, v in jsondecode(file("assets/environment_variables/staging.json")) : { name = k, value = v }]
     production = [for k, v in jsondecode(file("assets/environment_variables/production.json")) : { name = k, value = v }]
   }
+
+  current_rds_config = local.rds_config[var.environment]
+
+  rds_config = {
+    staging = {
+      instance_type            = "db.t3.micro"
+      port                     = 5432
+      autoscaling_min_capacity = 0
+      autoscaling_max_capacity = 3
+    }
+
+    production = {
+      instance_type            = "db.t3.micro"
+      port                     = 5432
+      autoscaling_min_capacity = 1
+      autoscaling_max_capacity = 3
+    }
+  }
 }
