@@ -26,3 +26,8 @@ variable "redis_auth_token" {
   description = "The auth token for the Redis cluster"
   type        = string
 }
+
+variable "bastion_allowed_ip_connection" {
+  description = "IP that can be connected to Bastion instance"
+  type        = string
+}
