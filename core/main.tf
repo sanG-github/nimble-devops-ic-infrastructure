@@ -21,7 +21,7 @@ module "security_group" {
 
   vpc_id                      = module.vpc.vpc_id
   app_port                    = local.app_port
-  rds_port                    = local.rds_port
+  rds_port                    = local.current_rds_config.port
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 }
 

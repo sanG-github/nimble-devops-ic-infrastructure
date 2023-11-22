@@ -14,9 +14,6 @@ locals {
   # The application exposed port
   app_port = 3000
 
-  # The RDS port
-  rds_port = 5432
-
   # The health check path of the Application
   health_check_path = "/health"
 
@@ -42,17 +39,17 @@ locals {
 
   rds_config = {
     staging = {
-      rds_instance_type            = "db.t3.micro"
-      port                         = 5432
-      autoscaling_min_capacity     = 0
-      rds_autoscaling_max_capacity = 3
+      instance_type            = "db.t3.micro"
+      port                     = 5432
+      autoscaling_min_capacity = 0
+      autoscaling_max_capacity = 3
     }
 
     production = {
-      rds_instance_type            = "db.t3.micro"
-      port                         = 5432
-      autoscaling_min_capacity     = 1
-      rds_autoscaling_max_capacity = 3
+      instance_type            = "db.t3.micro"
+      port                     = 5432
+      autoscaling_min_capacity = 1
+      autoscaling_max_capacity = 3
     }
   }
 }
