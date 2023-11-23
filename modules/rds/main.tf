@@ -3,8 +3,7 @@ module "rds" {
   source  = "terraform-aws-modules/rds-aurora/aws"
   version = "8.5.0"
 
-  name                   = local.namespace
-  create_db_subnet_group = true
+  name = local.namespace
 
   engine         = local.engine
   engine_version = local.engine_version
@@ -13,6 +12,7 @@ module "rds" {
   vpc_id                 = var.vpc_id
   subnets                = var.subnet_ids
   vpc_security_group_ids = var.vpc_security_group_ids
+  create_db_subnet_group = true
 
   instance_class = var.instance_type
   instances = {
