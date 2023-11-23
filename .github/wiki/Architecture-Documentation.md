@@ -8,13 +8,13 @@ The infrastructure is hosted on AWS and relies on various AWS services, includin
 
 - Instance Type: `db.t3.micro`
 
-### ElastiCache Instance Type
+### ElastiCache Node Type
 
-- Instance Type: `cache.t3.micro`
+- Node Type: `cache.t2.micro`
 
 ### ECS Fargate Instance Type
 
-The instance type for ECS Fargate varies and is controlled by the `ecs` variable, which is further described in this documentation.
+The ECS Fargate instance type is dynamically determined based on the environment-specific file stored within the assets/ecs_configs folder. This file, named after the environment, dictates essential configurations for ECS. It encompasses settings like `task_desired_count`, `web_container_cpu`, `web_container_memory`, `deployment_maximum_percent`, `deployment_minimum_healthy_percent`, `max_capacity`, and `max_cpu_threshold`. These configurations must be explicitly defined within this designated file to accurately configure ECS behavior.
 
 ## Required Software
 
@@ -40,25 +40,21 @@ Version control connections should be set up for each workspace. The `shared` wo
 
 All variables should be set as Terraform variables, and the 'sensitive' flag should be applied where necessary. The following variables are shared between all workspaces:
 
-| Variable                    | Value       |
-|:----------------------------|-------------|
-| aws_access_key              | SENSITIVE   |
-| aws_secret_key              | SENSITIVE   |
-| app_name                    | nimble-devops-ic-web  |
-| app_port                    | 4000        |
-| bastion_allowed_ip_connection | SENSITIVE |
-| health_check_path           | /health     |
-| owner                       | sanghuynh20000 |
-| ecs                         | {<br>&nbsp;&nbsp;task_desired_count = 3 <br>&nbsp;&nbsp;web_container_cpu = 256 <br>&nbsp;&nbsp;web_container_memory = 512 <br>&nbsp;&nbsp;deployment_maximum_percent = 200 <br>&nbsp;&nbsp;deployment_minimum_healthy_percent = 50 <br>&nbsp;&nbsp;max_capacity = 10 <br>&nbsp;&nbsp;max_cpu_threshold = 80 <br>} |
+| Variable                     | Value       |
+|:-----------------------------|-------------|
+| AWS_ACCESS_KEY_ID            | SENSITIVE   |
+| AWS_SECRET_ACCESS_KEY        | SENSITIVE   |
+| bastion_allowed_ip_connection| SENSITIVE   |
 
 These variables should be configured for `staging` and `production` workspaces. If both environments share those variables, you can set them in the [Variable Sets](https://developer.hashicorp.com/terraform/tutorials/cloud/cloud-multiple-variable-sets).
 
-| Variable        | Value     |
-|:----------------|-----------|
-| environment     | staging   |
-| secret_key_base | SENSITIVE |
-| rds_username    | SENSITIVE |
-| rds_password    | SENSITIVE |
+| Variable            | Value     |
+|:--------------------|-----------|
+| environment         | staging   |
+| secret_key_base     | SENSITIVE |
+| rds_username        | SENSITIVE |
+| rds_password        | SENSITIVE |
+| redis_auth_token    | SENSITIVE |
 
 The following variables should be configured for the `shared` workspace:
 
