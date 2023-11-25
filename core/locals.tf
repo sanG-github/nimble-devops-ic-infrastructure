@@ -39,14 +39,14 @@ locals {
 
   rds_config = {
     staging = {
-      instance_type            = "db.t3.micro"
+      instance_type            = "db.t3.medium"
       port                     = 5432
       autoscaling_min_capacity = 0
       autoscaling_max_capacity = 3
     }
 
     production = {
-      instance_type            = "db.t3.micro"
+      instance_type            = "db.t3.medium"
       port                     = 5432
       autoscaling_min_capacity = 1
       autoscaling_max_capacity = 3
