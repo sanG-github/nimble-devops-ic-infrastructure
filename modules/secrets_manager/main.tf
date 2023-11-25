@@ -37,3 +37,10 @@ resource "aws_secretsmanager_secret" "service_secrets" {
     Name = "${local.namespace}-secrets-manager"
   }
 }
+
+resource "aws_secretsmanager_secret_version" "service_secrets" {
+  for_each = var.secrets
+
+  secret_id     = aws_secretsmanager_secret.service_secrets[lower(each.key)].id
+  secret_string = each.value
+}
