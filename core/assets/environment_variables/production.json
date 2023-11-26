@@ -3,5 +3,6 @@
   "DEFAULT_LOCALE": "en",
   "FALLBACK_LOCALES": "en",
   "MAILER_DEFAULT_HOST": "localhost",
-  "MAILER_DEFAULT_PORT": "80"
+  "MAILER_DEFAULT_PORT": "80",
+  "APP_PORT": "3000"
 }
