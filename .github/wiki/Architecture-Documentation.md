@@ -6,7 +6,7 @@ The infrastructure is hosted on AWS and relies on various AWS services, includin
 
 ### RDS Instance Type
 
-- Instance Type: `db.t3.micro`
+- Instance Type: `db.t3.medium`
 
 ### ElastiCache Node Type
 
