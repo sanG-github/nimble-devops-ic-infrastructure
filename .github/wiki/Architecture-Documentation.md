@@ -2,7 +2,7 @@ This document outlines the software and hardware requirements for running the in
 
 ## Required Hardware
 
-The infrastructure is hosted on AWS and relies on various AWS services, including ECS with Fargate launch type, RDS, and ElastiCache. Migrating to a different cloud provider is possible, thanks to Terraform's flexibility.
+The infrastructure is hosted on AWS and relies on various AWS services, including ECS with Fargate launch type, RDS, and ElastiCache.
 
 ### RDS Instance Type
 
