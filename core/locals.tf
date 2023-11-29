@@ -17,6 +17,9 @@ locals {
   # The health check path of the Application
   health_check_path = "/health"
 
+  # The IP addresses allowed to connect to the bastion host
+  bastion_allowed_ip_connections = []
+
   # The ECS configuration for the current environment
   current_ecs_config = local.ecs_config[var.environment]
 

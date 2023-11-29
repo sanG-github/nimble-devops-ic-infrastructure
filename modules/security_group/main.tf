@@ -128,12 +128,14 @@ resource "aws_security_group" "bastion" {
 }
 
 resource "aws_security_group_rule" "bastion_ingress_ssh" {
+  for_each = var.bastion_allowed_ip_connections
+
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 22
   to_port           = 22
   security_group_id = aws_security_group.bastion.id
-  cidr_blocks       = ["${var.bastion_allowed_ip_connection}/32"]
+  cidr_blocks       = ["${each.value}/32"]
   description       = "Allowed IP connection"
 }
 

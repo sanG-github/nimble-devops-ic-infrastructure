@@ -19,12 +19,12 @@ module "s3" {
 module "security_group" {
   source = "../modules/security_group"
 
-  vpc_id                        = module.vpc.vpc_id
-  app_port                      = local.app_port
-  rds_port                      = local.current_rds_config.port
-  elasticache_port              = local.current_elasticache_config.port
-  private_subnets_cidr_blocks   = module.vpc.private_subnets_cidr_blocks
-  bastion_allowed_ip_connection = var.bastion_allowed_ip_connection
+  vpc_id                         = module.vpc.vpc_id
+  app_port                       = local.app_port
+  rds_port                       = local.current_rds_config.port
+  elasticache_port               = local.current_elasticache_config.port
+  private_subnets_cidr_blocks    = module.vpc.private_subnets_cidr_blocks
+  bastion_allowed_ip_connections = local.bastion_allowed_ip_connections
 }
 
 module "alb" {

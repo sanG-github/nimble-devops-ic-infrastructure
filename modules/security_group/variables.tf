@@ -23,7 +23,7 @@ variable "elasticache_port" {
   type        = number
 }
 
-variable "bastion_allowed_ip_connection" {
+variable "bastion_allowed_ip_connections" {
   description = "IP that can be connected to Bastion instance"
-  type        = string
+  type        = set(string)
 }
