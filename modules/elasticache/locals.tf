@@ -1,5 +1,5 @@
 locals {
-  namespace = "devops-ic-elasticache"
+  namespace = "${var.environment}-devops-ic-elasticache"
 
   engine                      = "redis"
   engine_version              = "6.x"

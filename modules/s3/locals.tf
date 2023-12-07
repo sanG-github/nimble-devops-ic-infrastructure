@@ -1,6 +1,6 @@
 locals {
   # The name of the bucket
-  asset_bucket_name = "devops-ic-assets-bucket"
+  asset_bucket_name = "${var.environment}-devops-ic-assets-bucket"
 
   # The name of ALB log bucket
   alb_log_bucket_name = "devops-ic-alb-log-bucket"
