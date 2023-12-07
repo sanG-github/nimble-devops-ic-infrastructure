@@ -44,7 +44,6 @@ All variables should be set as Terraform variables, and the 'sensitive' flag sho
 |:-----------------------------|-------------|
 | AWS_ACCESS_KEY_ID            | SENSITIVE   |
 | AWS_SECRET_ACCESS_KEY        | SENSITIVE   |
-| bastion_allowed_ip_connection| SENSITIVE   |
 
 These variables should be configured for `staging` and `production` workspaces. If both environments share those variables, you can set them in the [Variable Sets](https://developer.hashicorp.com/terraform/tutorials/cloud/cloud-multiple-variable-sets).
 
