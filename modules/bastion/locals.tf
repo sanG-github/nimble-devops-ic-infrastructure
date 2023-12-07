@@ -1,5 +1,5 @@
 locals {
-  namespace = "devops-ic-bastion"
+  namespace = "${var.environment}-devops-ic-bastion"
 
   # The AMI image ID
   image_id = "ami-08569b978cc4dfa10"

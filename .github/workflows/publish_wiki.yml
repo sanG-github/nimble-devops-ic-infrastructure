@@ -9,22 +9,17 @@ on:
     branches:
       - develop
 
-permissions: read-all
-
 jobs:
-  publish_wiki:
+  publish:
     name: Publish Wiki
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 1
+
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
+      - name: Checkout the repository
+        uses: actions/checkout@v4
 
       - name: Publish Github Wiki
-        uses: nimblehq/publish-github-wiki-action@v1.0
+        uses: Andrew-Chen-Wang/github-wiki-action@v4
         with:
-          user_name: bot-nimble
-          user_email: ${{ secrets.GH_EMAIL }}
-          user_access_token: ${{ secrets.GH_TOKEN }}
+          path: .github/wiki

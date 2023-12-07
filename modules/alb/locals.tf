@@ -1,8 +1,8 @@
 locals {
   # aws_lb
-  namespace                     = "devops-ic-alb"
+  namespace                     = "${var.environment}-devops-ic-alb"
   access_logs_bucket            = "${local.namespace}-log-bucket"
-  application_target_group_name = "${local.namespace}-application-tg"
+  application_target_group_name = "${local.namespace}-app-tg"
   load_balancer_type            = "application"
 
   # aws_lb_target_group

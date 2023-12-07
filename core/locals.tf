@@ -25,8 +25,8 @@ locals {
 
   # ECS configurations for each environment
   ecs_config = {
-    staging    = jsondecode(file("assets/ecs_configs/staging.json"))
-    production = jsondecode(file("assets/ecs_configs/production.json"))
+    staging = jsondecode(file("assets/ecs_configs/staging.json"))
+    prod    = jsondecode(file("assets/ecs_configs/prod.json"))
   }
 
   # ENV variables for the current environment
@@ -34,8 +34,8 @@ locals {
 
   # ENV variables for each environment
   environment_variables = {
-    staging    = [for k, v in jsondecode(file("assets/environment_variables/staging.json")) : { name = k, value = v }]
-    production = [for k, v in jsondecode(file("assets/environment_variables/production.json")) : { name = k, value = v }]
+    staging = [for k, v in jsondecode(file("assets/environment_variables/staging.json")) : { name = k, value = v }]
+    prod    = [for k, v in jsondecode(file("assets/environment_variables/prod.json")) : { name = k, value = v }]
   }
 
   current_rds_config = local.rds_config[var.environment]
@@ -48,7 +48,7 @@ locals {
       autoscaling_max_capacity = 3
     }
 
-    production = {
+    prod = {
       instance_type            = "db.t3.medium"
       port                     = 5432
       autoscaling_min_capacity = 1
@@ -64,7 +64,7 @@ locals {
       port      = 6379
     }
 
-    production = {
+    prod = {
       node_type = "cache.t2.micro"
       port      = 6379
     }

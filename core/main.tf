@@ -14,11 +14,14 @@ module "vpc" {
 
 module "s3" {
   source = "../modules/s3"
+
+  environment = var.environment
 }
 
 module "security_group" {
   source = "../modules/security_group"
 
+  environment                    = var.environment
   vpc_id                         = module.vpc.vpc_id
   app_port                       = local.app_port
   rds_port                       = local.current_rds_config.port
@@ -30,6 +33,7 @@ module "security_group" {
 module "alb" {
   source = "../modules/alb"
 
+  environment        = var.environment
   vpc_id             = module.vpc.vpc_id
   app_port           = local.app_port
   subnet_ids         = module.vpc.public_subnet_ids
@@ -40,12 +44,14 @@ module "alb" {
 module "cloudwatch" {
   source = "../modules/cloudwatch"
 
-  kms_key_id = module.secrets_manager.secret_key_arn
+  environment = var.environment
+  kms_key_id  = module.secrets_manager.secret_key_arn
 }
 
 module "secrets_manager" {
   source = "../modules/secrets_manager"
 
+  environment = var.environment
   secrets = {
     database_url    = module.rds.db_url
     redis_url       = module.elasticache.redis_primary_endpoint
@@ -80,6 +86,7 @@ module "ecs" {
 module "rds" {
   source = "../modules/rds"
 
+  environment            = var.environment
   vpc_security_group_ids = module.security_group.rds_security_group_ids
   vpc_id                 = module.vpc.vpc_id
   subnet_ids             = module.vpc.private_subnet_ids
@@ -97,6 +104,7 @@ module "rds" {
 module "elasticache" {
   source = "../modules/elasticache"
 
+  environment        = var.environment
   node_type          = local.current_elasticache_config.node_type
   port               = local.current_elasticache_config.port
   subnet_ids         = module.vpc.private_subnet_ids
@@ -108,5 +116,6 @@ module "elasticache" {
 module "bastion" {
   source = "../modules/bastion"
 
+  environment                 = var.environment
   instance_security_group_ids = module.security_group.bastion_security_group_ids
 }
