@@ -8,7 +8,10 @@ locals {
   environment_variables = toset([
     { name = "AWS_REGION", value = var.region },
     { name = "HEALTH_CHECK_PATH", value = var.health_check_path },
-    { name = "APP_PORT", value = var.app_port }
+    { name = "APP_PORT", value = var.app_port },
+    { name = "AVAILABLE_LOCALES", value = "en" },
+    { name = "DEFAULT_LOCALE", value = "en" },
+    { name = "FALLBACK_LOCALES", value = "en" }
   ])
 
   container_vars = {

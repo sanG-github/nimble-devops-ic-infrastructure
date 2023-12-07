@@ -12,6 +12,7 @@ module "rds" {
   vpc_id                 = var.vpc_id
   subnets                = var.subnet_ids
   vpc_security_group_ids = var.vpc_security_group_ids
+  create_db_subnet_group = true
 
   instance_class = var.instance_type
   instances = {
