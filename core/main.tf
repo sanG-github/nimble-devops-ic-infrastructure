@@ -62,6 +62,7 @@ module "secrets_manager" {
 module "ecs" {
   source = "../modules/ecs"
 
+  environment                        = var.environment
   region                             = local.region
   app_port                           = local.app_port
   ecr_repo_name                      = local.ecr_repo_name
