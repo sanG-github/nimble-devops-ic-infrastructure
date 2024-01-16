@@ -3,7 +3,7 @@ locals {
   description = "KMS key for ${local.namespace} service"
 
   # The namespace for the KMS
-  namespace = "devops-ic-kms"
+  namespace = "${var.environment}-devops-ic-kms"
 
   # Enable key rotation
   enable_key_rotation = true

@@ -1,6 +1,6 @@
 locals {
   # The namespace for the ECS
-  namespace = "devops-ic-ecs"
+  namespace = "${var.environment}-devops-ic-ecs"
 
   ecr_tag = "${local.namespace}-app"
 

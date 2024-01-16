@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "The application environment, used to tag the resources, e.g. `acme-web-staging`"
+  type        = string
+}
+
 variable "subnet_ids" {
   description = "A list of subnet IDs to attach to the LB"
   type        = list(string)
