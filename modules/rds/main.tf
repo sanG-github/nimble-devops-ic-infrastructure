@@ -26,6 +26,7 @@ module "rds" {
   create_monitoring_role = var.create_monitoring_role
   create_security_group  = false
   storage_encrypted      = true
+  skip_final_snapshot    = true
 
   publicly_accessible = false
 
