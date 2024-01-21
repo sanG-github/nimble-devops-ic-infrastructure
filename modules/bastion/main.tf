@@ -24,3 +24,19 @@ resource "aws_launch_configuration" "bastion_instance" {
     encrypted = true
   }
 }
+
+
+resource "aws_autoscaling_group" "bastion_instance" {
+  name                 = "${local.namespace}-instance"
+  min_size             = local.min_instance_count
+  max_size             = local.max_instance_count
+  desired_capacity     = local.instance_desired_count
+  launch_configuration = aws_launch_configuration.bastion_instance.name
+  vpc_zone_identifier  = var.subnet_ids
+
+  tag {
+    key                 = "Name"
+    value               = "${local.namespace}-instance"
+    propagate_at_launch = true
+  }
+}
