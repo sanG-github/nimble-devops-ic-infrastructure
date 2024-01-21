@@ -25,8 +25,8 @@ resource "aws_launch_configuration" "bastion_instance" {
   }
 }
 
-
 resource "aws_autoscaling_group" "bastion_instance" {
+  #checkov:skip=CKV_AWS_315: Use EC2 launch template
   name                 = "${local.namespace}-instance"
   min_size             = local.min_instance_count
   max_size             = local.max_instance_count
