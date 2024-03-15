@@ -1,9 +1,9 @@
 locals {
   # The name of the bucket
-  asset_bucket_name = "${var.environment}-devops-ic-assets-bucket"
+  asset_bucket_name = "${var.environment}-devops-ic-asset-1-bucket"
 
   # The name of ALB log bucket
-  alb_log_bucket_name = "${var.environment}-devops-ic-alb-log-bucket"
+  alb_log_bucket_name = "${var.environment}-devops-ic-alb-log-1-bucket"
 
   # All objects should be deleted from the bucket when the bucket is destroyed
   force_destroy = true
