@@ -118,5 +118,6 @@ module "bastion" {
   source = "../modules/bastion"
 
   environment                 = var.environment
+  subnet_ids                  = module.vpc.public_subnet_ids
   instance_security_group_ids = module.security_group.bastion_security_group_ids
 }

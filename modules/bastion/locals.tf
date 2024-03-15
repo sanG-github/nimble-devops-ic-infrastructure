@@ -6,4 +6,13 @@ locals {
 
   # The instance type
   instance_type = "t3.nano"
+
+  # The minimum number of instances
+  min_instance_count = 1
+
+  # The maximum number of instances
+  max_instance_count = 1
+
+  # The desired number of instances
+  instance_desired_count = 1
 }
